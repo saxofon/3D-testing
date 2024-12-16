@@ -4,7 +4,7 @@ GIT_URL ?= git@github.com:saxofon/raylib.git
 build/raylib/LICENSE:
 	mkdir -p build
 	git -C build clone $(GIT_URL)
-	git -C build/raylib checkout feature/fixes
+	#git -C build/raylib checkout feature/fixes
 
 
 build/raylib/build/Makefile: build/raylib/LICENSE
