@@ -6,7 +6,7 @@
 
 static Model thing;
 
-static int cameraMode = CAMERA_FIRST_PERSON;
+static int cameraMode = CAMERA_THIRD_PERSON;
 
 static void draw_gui(Camera camera)
 {
@@ -19,9 +19,6 @@ static void draw_gui(Camera camera)
         DrawText("- Camera mode keys: 1, 2, 3, 4", 15, 60, 10, BLACK);
         DrawText("- Zoom keys: num-plus, num-minus or mouse scroll", 15, 75, 10, BLACK);
         DrawText("- Camera projection key: P", 15, 90, 10, BLACK);
-
-        DrawRectangle(600, 5, 195, 100, Fade(SKYBLUE, 0.5f));
-        DrawRectangleLines(600, 5, 195, 100, BLUE);
 
         DrawText("Camera status:", 610, 15, 10, BLACK);
         DrawText(TextFormat("- Mode: %s", (cameraMode == CAMERA_FREE) ? "FREE" :
@@ -37,10 +34,10 @@ static void draw_gui(Camera camera)
 
 static void draw_models(void)
 {
-        DrawModel(thing, (Vector3){ 0.0f, 1.0f, 0.0f }, 1.0f, WHITE);
+        DrawModel(thing, (Vector3){ 0.0f, 1.0f, 0.0f }, 1.0f, BLUE);
 }
 
-int main(void)
+int main(int argc, char *argv[])
 {
     const int screenWidth = 800;
     const int screenHeight = 450;
@@ -56,7 +53,7 @@ int main(void)
     camera.projection = CAMERA_PERSPECTIVE;             // Camera projection type
 
 
-    thing = LoadModel("raylib/examples/models/resources/models/obj/plane.obj");
+    thing = LoadModel(argv[1]);
 
     DisableCursor();
 
@@ -145,13 +142,9 @@ int main(void)
 	draw_gui(camera);
 
         EndDrawing();
-        //----------------------------------------------------------------------------------
     }
 
-    // De-Initialization
-    //--------------------------------------------------------------------------------------
     CloseWindow();        // Close window and OpenGL context
-    //--------------------------------------------------------------------------------------
 
     return 0;
 }
